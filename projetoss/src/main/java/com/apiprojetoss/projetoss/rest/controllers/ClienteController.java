@@ -37,8 +37,7 @@ public class ClienteController {
 
     @DeleteMapping("/deletar/{id}")
     public void delete(@PathVariable Integer id) {
-        Optional<Cliente> clienteOpt = clienteService.findById(id);
-        clienteOpt
+        clienteService.findById(id)
                 .map(c -> {
                     clienteService.delete(id);
                     return null;
