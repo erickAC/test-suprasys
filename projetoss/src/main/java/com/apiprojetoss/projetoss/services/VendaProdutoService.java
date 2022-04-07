@@ -11,8 +11,8 @@ public class VendaProdutoService {
     @Autowired
     private VendaProdutoRepository vendaProdutoRepository;
 
-    public void create(VendaProduto vendaProduto) {
-        vendaProdutoRepository.save(vendaProduto);
+    public VendaProduto create(VendaProduto vendaProduto) {
+        return vendaProdutoRepository.save(vendaProduto);
     }
 
     public VendaProduto findById(Integer id) {

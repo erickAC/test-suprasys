@@ -28,6 +28,7 @@ public class Venda implements Serializable {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "venda")
+    @JsonIgnoreProperties({"venda"})
     private List<VendaProduto> vendaProdutos;
 
     @Column(nullable = false)

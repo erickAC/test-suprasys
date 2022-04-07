@@ -36,7 +36,6 @@ public class VendaController {
     @PostMapping("/gravar")
     @ResponseStatus(HttpStatus.CREATED)
     public Venda create(@RequestBody Venda venda) {
-        System.out.println(venda)       ;
         return vendaService.create(venda);
 
     }
