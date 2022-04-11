@@ -1,5 +1,6 @@
 package com.apiprojetoss.projetoss.model;
 
+import com.apiprojetoss.projetoss.model.enums.EnumCliente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,16 +17,17 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String nome;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
     private String login;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
     private String senha;
 
-    @Column(length = 1)
-    private Integer situacao;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "situacao")
+    private EnumCliente situacao;
 
 }

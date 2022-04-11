@@ -1,7 +1,9 @@
 package com.apiprojetoss.projetoss.services;
 
+import ch.qos.logback.core.net.server.Client;
 import com.apiprojetoss.projetoss.model.Cliente;
 import com.apiprojetoss.projetoss.repositories.ClienteRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,9 @@ public class ClienteService {
 
     public void delete(Integer id) {
         clienteRepository.deleteById(id);
+    }
+
+    public Optional<Cliente> findByNome(String nome) {
+        return clienteRepository.findByNome(nome);
     }
 }
