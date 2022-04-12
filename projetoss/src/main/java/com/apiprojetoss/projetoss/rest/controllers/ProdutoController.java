@@ -38,11 +38,10 @@ public class ProdutoController {
         return produtoService.findById(id);
     }
 
-    @Transactional
     @PostMapping("/gravar")
     @ResponseStatus(HttpStatus.CREATED)
     public Produto create(@RequestBody Produto produto) {
-        if(produto.getEstoque() == null) {
+        if(produto.getEstoque() == 0 || produto.getEstoque() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, produto.getNome() + " sem estoque");
         }
         return produtoService.create(produto);

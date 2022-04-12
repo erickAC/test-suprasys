@@ -1,7 +1,6 @@
 package com.apiprojetoss.projetoss.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,12 +23,13 @@ public class Venda implements Serializable {
     private Integer id;
 
     @OneToOne
+    @JoinColumn(name = "cliente")
     @JsonIgnoreProperties({"login", "senha"})
+    @JsonBackReference
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "venda")
-    @JsonIgnoreProperties({"venda"})
-    private List<VendaProduto> vendaProdutos;
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
+    private List<VendaProduto> vendaProduto;
 
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")

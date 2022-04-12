@@ -6,6 +6,7 @@ import com.apiprojetoss.projetoss.services.ClienteService;
 import com.apiprojetoss.projetoss.services.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class VendaController {
         return vendaService.findById(id);
     }
 
+    @Transactional
     @PostMapping("/gravar")
     @ResponseStatus(HttpStatus.CREATED)
     public Venda create(@RequestBody Venda venda) {

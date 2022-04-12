@@ -1,7 +1,6 @@
 package com.apiprojetoss.projetoss.config;
 
 import com.apiprojetoss.projetoss.services.UserDetailsService;
-import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -33,11 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/**")
-
                 .hasAnyRole("USER")
+                .antMatchers("/h2-console/**")
+                .permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .httpBasic();
-
+        http.headers().frameOptions().disable();
     }
 
     @Override

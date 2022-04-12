@@ -22,7 +22,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         return User
                 .builder()
                 .username("recrutamento")
-                .password(encoder.encode("123"))
+                .password(encoder.encode("recrutamento"))
                 .roles("USER", "ADMIN")
                 .build();
     }

@@ -30,4 +30,7 @@ public class Cliente {
     @Column(name = "situacao")
     private EnumCliente situacao;
 
+    @OneToOne
+    @JoinColumn(name = "venda")
+    private Venda venda;
 }

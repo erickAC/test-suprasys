@@ -1,5 +1,6 @@
 package com.apiprojetoss.projetoss.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,9 +25,8 @@ public class VendaProduto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "venda_id")
-    @JsonIgnoreProperties({"vendaProdutos"})
     private Venda venda;
 
     @ManyToOne
@@ -36,17 +36,13 @@ public class VendaProduto implements Serializable {
     @Column(nullable = false)
     private Integer quantidade;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double valor;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double desconto;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double total;
-
-    public Double getTotal() {
-        return total * desconto;
-    }
 
 }
