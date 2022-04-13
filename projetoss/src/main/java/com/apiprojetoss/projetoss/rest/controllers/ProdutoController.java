@@ -34,8 +34,8 @@ public class ProdutoController {
 
     @GetMapping("listar/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Produto> findById(@PathVariable Integer id)  {
-        return produtoService.findById(id);
+    public Produto findById(@PathVariable Integer id)  {
+        return produtoService.findById(id).get();
     }
 
     @PostMapping("/gravar")

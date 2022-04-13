@@ -3,6 +3,7 @@ package com.apiprojetoss.projetoss.rest.controllers;
 import com.apiprojetoss.projetoss.model.Cliente;
 import com.apiprojetoss.projetoss.model.enums.EnumCliente;
 import com.apiprojetoss.projetoss.services.ClienteService;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,8 +30,10 @@ public class ClienteController {
 
     @GetMapping("listar/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Cliente> findById(@PathVariable Integer id)  {
-        return clienteService.findById(id);
+    public Cliente findById(@PathVariable Integer id)  {
+        Optional<Cliente> cliente = clienteService.findById(id);
+            return clienteService.findById(id).get();
+
     }
 
 

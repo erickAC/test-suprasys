@@ -30,8 +30,8 @@ public class VendaController {
 
     @GetMapping("listar/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Venda> findById(@PathVariable Integer id)  {
-        return vendaService.findById(id);
+    public Venda findById(@PathVariable Integer id)  {
+        return vendaService.findById(id).get();
     }
 
     @Transactional
