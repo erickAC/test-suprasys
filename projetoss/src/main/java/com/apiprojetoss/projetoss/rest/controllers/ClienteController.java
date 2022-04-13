@@ -33,13 +33,11 @@ public class ClienteController {
     public Cliente findById(@PathVariable Integer id)  {
         Optional<Cliente> cliente = clienteService.findById(id);
             return clienteService.findById(id).get();
-
     }
 
-
     @GetMapping("/listar/nome/{nome}")
-    public Optional<Cliente> findByNome(@PathVariable String nome) {
-        return clienteService.findByNome(nome);
+    public Cliente findByNome(@PathVariable String nome) {
+        return clienteService.findByNome(nome).get();
     }
 
     @PostMapping("/gravar")
@@ -58,16 +56,14 @@ public class ClienteController {
                 });
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("gravar/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Cliente update(@PathVariable Integer id, @RequestBody Cliente cliente) {
         Cliente clienteExistente = clienteService.findById(id).get();
         BeanUtils.copyProperties(cliente, clienteExistente);
         cliente.setId(id);
-        return clienteService.create(cliente);
+        return clienteService.update(cliente);
     }
-
-
 
     @PatchMapping("/situacao/{id}")
     public Cliente atualizaSituacao(@PathVariable Integer id) {
@@ -77,8 +73,7 @@ public class ClienteController {
         } else {
             cliente.setSituacao(EnumCliente.ATIVO);
         }
-        return clienteService.create(cliente);
+        return clienteService.atualizaSituacao(cliente);
     }
-
 
 }

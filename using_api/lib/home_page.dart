@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:using_api/src/cliente_model.dart';
+import 'package:using_api/src/models/cliente_model.dart';
+import 'package:using_api/src/services/api_service.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -11,6 +12,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  late List<ClienteModel>? _clienteModel = [];
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  void _getData() async {
+    _clienteModel = (await ApiService().listAll())!; 
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,55 +64,18 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Recrutamento SupraSys'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Container(
-          child: Row(
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            color: Colors.blue,
-                            alignment: Alignment.center,
-                            child: 
-                            Padding(
-
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    child:
-                                     Icon(Icons.people, color: Colors.white), 
-                                  ),
-                                  SizedBox(width: 10,),
-                                  Container(
-                                    child: Text('Clientes', style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold
-                                      ),
-                                      ),
-                                  )
-                                  
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ]
-            ),
-        ),
+      body: _clienteModel == null
+      ? const Center(child: CircularProgressIndicator(),) 
+      : 
+      ListView.builder(
+        itemCount: _clienteModel!.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+              title: Text('Erick'),
+              trailing: Text('Erick'),
+          );
+        }
       )
-    );
+        );
   }
-}
+  }

@@ -8,6 +8,7 @@ import com.apiprojetoss.projetoss.repositories.ClienteRepository;
 import com.apiprojetoss.projetoss.repositories.ProdutoRepository;
 import com.apiprojetoss.projetoss.repositories.VendaProdutoRepository;
 import com.apiprojetoss.projetoss.repositories.VendaRepository;
+import com.apiprojetoss.projetoss.rest.controllers.exceptions.ProdutoSemEstoque;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,9 +28,6 @@ public class VendaService {
 
     @Autowired
     private VendaRepository vendaRepository;
-
-    @Autowired
-    private VendaProdutoRepository vendaProdutoRepository;
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -55,18 +53,35 @@ public class VendaService {
             cliente.setId(cliente.getId());
             clienteRepository.save(cliente);
         }
+        venda.getVendaProduto().forEach(i -> i.setVenda(venda));
         venda.getVendaProduto().stream().forEach(vendaProduto -> {
            Integer id = vendaProduto.getProduto().getId();
            Produto produto = produtoRepository.findById(id).get();
            vendaProduto.setProduto(produto);
            verificaEstoque(produto);
-           produto.setEstoque(produto.getEstoque() - 1);
-           vendaProduto.setDesconto(vendaProduto.getProduto().getDesconto()/100);
-           vendaProduto.setValor(vendaProduto.getProduto().getValor() * vendaProduto.getDesconto());
-           vendaProduto.setTotal(vendaProduto.getValor() * vendaProduto.getQuantidade());
+           produto.setEstoque(produto.getEstoque() - vendaProduto.getQuantidade());
+           verificaEstoque(produto);
+           vendaProduto.setDesconto(produto.getDesconto() * vendaProduto.getQuantidade());
+           vendaProduto.setValor(produto.getValor() * vendaProduto.getQuantidade());
+           vendaProduto.setTotal(vendaProduto.getValor() - vendaProduto.getDesconto());
         });
+        venda.setTotal(venda.getVendaProduto()
+                .stream()
+                .mapToDouble(i -> i.getTotal().doubleValue())
+                .sum());
+        venda.setDesconto(venda.getVendaProduto()
+                .stream()
+                .mapToDouble(i -> i.getDesconto().doubleValue())
+                .sum());
+        venda.setValor(venda.getVendaProduto()
+                .stream()
+                .mapToDouble(i -> i.getValor().doubleValue())
+                .sum());
+        venda.setTotal(venda.getVendaProduto()
+                .stream()
+                .mapToDouble(i -> i.getTotal().doubleValue())
+                .sum());
         venda.setCliente(cliente);
-        venda.getVendaProduto().forEach(i -> i.setVenda(venda));
         venda.setData(LocalDate.now());
         return vendaRepository.save(venda);
     }
@@ -75,8 +90,8 @@ public class VendaService {
     }
 
     public boolean verificaEstoque(Produto produto) {
-        if(produto.getEstoque().equals(0) || produto.getEstoque().equals(null)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Produto sem estoque");
+        if(produto.getEstoque().equals(0) || produto.getEstoque().equals(null) || produto.getEstoque() < 0) {
+            throw new ProdutoSemEstoque("Produto sem estoque");
         }
         return true;
     }

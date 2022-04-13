@@ -5,6 +5,7 @@ import com.apiprojetoss.projetoss.model.Produto;
 import com.apiprojetoss.projetoss.model.VendaProduto;
 import com.apiprojetoss.projetoss.repositories.VendaProdutoRepository;
 import com.apiprojetoss.projetoss.repositories.VendaRepository;
+import com.apiprojetoss.projetoss.rest.controllers.exceptions.ProdutoSemEstoque;
 import com.apiprojetoss.projetoss.services.ProdutoService;
 import com.apiprojetoss.projetoss.services.VendaProdutoService;
 import org.springframework.beans.BeanUtils;
@@ -42,7 +43,7 @@ public class ProdutoController {
     @ResponseStatus(HttpStatus.CREATED)
     public Produto create(@RequestBody Produto produto) {
         if(produto.getEstoque() == 0 || produto.getEstoque() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, produto.getNome() + " sem estoque");
+            throw new ProdutoSemEstoque(produto.getNome() + " sem estoque");
         }
         return produtoService.create(produto);
     }

@@ -3,6 +3,7 @@ package com.apiprojetoss.projetoss.services;
 import ch.qos.logback.core.net.server.Client;
 import com.apiprojetoss.projetoss.model.Cliente;
 import com.apiprojetoss.projetoss.repositories.ClienteRepository;
+import com.apiprojetoss.projetoss.rest.controllers.exceptions.ClienteExistente;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,14 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
     public Cliente create(Cliente cliente) {
+        Optional clienteOpt = clienteRepository.findByNome(cliente.getNome());
+        if(clienteOpt.isPresent()){
+            throw new ClienteExistente("Cliente " + cliente.getNome() + " Existente, tente outro nome");
+        }
+        return clienteRepository.save(cliente);
+    }
+
+    public Cliente update(Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
@@ -34,5 +43,9 @@ public class ClienteService {
 
     public Optional<Cliente> findByNome(String nome) {
         return clienteRepository.findByNome(nome);
+    }
+
+    public Cliente atualizaSituacao(Cliente cliente) {
+        return clienteRepository.save(cliente);
     }
 }
