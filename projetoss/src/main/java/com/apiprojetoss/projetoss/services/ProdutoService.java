@@ -1,13 +1,13 @@
 package com.apiprojetoss.projetoss.services;
 
-import com.apiprojetoss.projetoss.model.Cliente;
-import com.apiprojetoss.projetoss.model.Produto;
-import com.apiprojetoss.projetoss.repositories.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.apiprojetoss.projetoss.model.Produto;
+import com.apiprojetoss.projetoss.repositories.ProdutoRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ProdutoService {
