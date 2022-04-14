@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:using_api/adicionar_cliente.dart';
+import 'package:using_api/cliente_page.dart';
 import 'package:using_api/home_page.dart';
 
 void main() {
@@ -17,7 +19,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomePage(),
+        locale: Locale('pt', 'BR'),
+        routes: {
+          '/': ((context) => HomePage()),
+          '/adicionar_cliente': ((context) => AdicionarCliente()),
+          ClientePage.routeName: (context) => ClientePage(),
+        },
     );
   }
 }
