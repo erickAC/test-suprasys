@@ -1,24 +1,15 @@
 package com.apiprojetoss.projetoss.rest.controllers;
 
-import com.apiprojetoss.projetoss.model.Cliente;
 import com.apiprojetoss.projetoss.model.Produto;
-import com.apiprojetoss.projetoss.model.VendaProduto;
-import com.apiprojetoss.projetoss.repositories.VendaProdutoRepository;
-import com.apiprojetoss.projetoss.repositories.VendaRepository;
+import com.apiprojetoss.projetoss.rest.controllers.exceptions.DeleteProduto;
 import com.apiprojetoss.projetoss.rest.controllers.exceptions.ProdutoSemEstoque;
 import com.apiprojetoss.projetoss.services.ProdutoService;
-import com.apiprojetoss.projetoss.services.VendaProdutoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.constraints.Null;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/produto")
@@ -54,10 +45,10 @@ public class ProdutoController {
                 .map(c -> {
                     produtoService.delete(id);
                     return null;
-                });
+                }).orElseThrow(() -> new DeleteProduto("Não é possivel deletar produto com venda associada"));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/gravar/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Produto update(@PathVariable Integer id, @RequestBody Produto produto) {
         Produto produtoExistente = produtoService.findById(id).get();

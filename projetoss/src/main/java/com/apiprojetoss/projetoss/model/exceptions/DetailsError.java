@@ -16,5 +16,4 @@ public class DetailsError {
     private String message;
     private LocalDate date;
 
-
 }

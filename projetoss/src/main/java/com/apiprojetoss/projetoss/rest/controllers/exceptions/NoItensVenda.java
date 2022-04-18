@@ -8,4 +8,5 @@ public class NoItensVenda extends RuntimeException{
     public NoItensVenda(String message) {
         super(message);
     }
+
 }

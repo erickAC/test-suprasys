@@ -22,7 +22,7 @@ public class Venda implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente")
     @JsonIgnoreProperties({"login", "senha"})
     @JsonBackReference
