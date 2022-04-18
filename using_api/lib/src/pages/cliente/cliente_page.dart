@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:using_api/src/models/cliente_model.dart';
 import 'package:using_api/src/services/ClienteService.dart';
+import 'package:using_api/src/templates/drawer_template.dart';
 
 class ClientePage extends StatelessWidget {
   const ClientePage({ Key? key }) : super(key: key);
@@ -19,18 +19,17 @@ class ClientePage extends StatelessWidget {
   }
 
   int idCliente = id.id;
-  TextEditingController idController = TextEditingController();
   TextEditingController nomeController = TextEditingController();
   TextEditingController loginController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
 
     return Scaffold(
-      drawer: Drawer(),
+      drawer: const DrawerTemplate(),
       appBar: AppBar(
-        title: Text('Cliente'),
+        title: const Text('Cliente'),
       ),
-      body: Container(
-        height: double.infinity,
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
         child: Center(
            child: FutureBuilder<ClienteModel>(
              future: _getDados(),
@@ -39,6 +38,7 @@ class ClientePage extends StatelessWidget {
                  return Padding(
                    padding: const EdgeInsets.all(8.0),
                    child: Column(
+                     mainAxisAlignment: MainAxisAlignment.center,
                      children: [
                        TextField(
                          decoration: InputDecoration(
@@ -72,13 +72,13 @@ class ClientePage extends StatelessWidget {
                           Navigator.of(context).pushNamed('/');
 
                          }, 
-                         child: Text("Atualizar Cliente")
+                         child: const Text("Atualizar Cliente")
                          ),
                      ],
                      ),
                  );
                } else {
-                 return Text('Carregando dados');
+                 return const Text('Carregando dados');
                }
              },
            )

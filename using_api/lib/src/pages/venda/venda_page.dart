@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:using_api/src/models/produto_model.dart';
 import 'package:using_api/src/services/ProdutoService.dart';

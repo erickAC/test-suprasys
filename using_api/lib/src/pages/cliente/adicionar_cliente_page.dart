@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:using_api/src/services/ClienteService.dart';
 
@@ -20,36 +19,30 @@ class ClienteAdd extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Nome do Cliente'
-                ),
-                controller: nomeController,
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Nome do Cliente'
               ),
+              controller: nomeController,
             )
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Login do Cliente'
-                ),
-                controller: loginController,
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Login do Cliente'
               ),
+              controller: loginController,
             )
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Senha do Cliente'
-                ),
-                controller: senhaController,
+            child: TextField(
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Senha do Cliente'
               ),
+              controller: senhaController,
             )
           ),
           TextButton(
@@ -63,7 +56,7 @@ class ClienteAdd extends StatelessWidget {
               Navigator.of(context).pushNamed('/');
 
             },
-             child: Text('Enviar'))
+             child: const Text('Enviar'))
         ],
         ),
     );

@@ -1,8 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:using_api/src/models/produto_model.dart';
 import 'package:using_api/src/models/venda_model.dart';
 import 'package:using_api/src/pages/produto/produto_page.dart';
 import 'package:using_api/src/services/VendaService.dart';

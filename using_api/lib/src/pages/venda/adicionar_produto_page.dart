@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:using_api/src/services/ClienteService.dart';
 import 'package:using_api/src/services/ProdutoService.dart';
 
 class AdicionarProduto extends StatelessWidget {
@@ -33,35 +31,29 @@ class AdicionarProduto extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Estoque do produto'
-                ),
-                controller: estoqueController,
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Estoque do produto'
               ),
+              controller: estoqueController,
             )
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Valor do produto'
-                ),
-                controller: valorController,
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Valor do produto'
               ),
+              controller: valorController,
             )
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Desconto do produto'
-                ),
-                controller: descontoController,
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Desconto do produto'
               ),
+              controller: descontoController,
             )
           ),
           TextButton(

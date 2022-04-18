@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DrawerTemplate extends StatelessWidget {
@@ -7,10 +6,8 @@ class DrawerTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      
        child: Container(
          height: MediaQuery.of(context).size.height,
-         alignment: Alignment.center,
          child: ListView(
            children: [
              TextButton(

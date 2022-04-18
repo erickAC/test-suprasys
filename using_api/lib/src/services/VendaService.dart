@@ -1,8 +1,5 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
-import 'package:using_api/src/models/cliente_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:using_api/src/models/produto_model.dart';
 import 'package:using_api/src/models/venda_model.dart';
 
 

@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:using_api/src/models/cliente_model.dart';
 import 'package:using_api/src/pages/cliente/cliente_page.dart';
@@ -33,7 +30,21 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: DrawerTemplate(),
       appBar: AppBar(
-        title: Text('Recrutamento SupraSys'),
+        title: Text('Recrutamento'),
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextButton(
+              style: TextButton.styleFrom(backgroundColor: Colors.white, primary: Colors.blue),
+              onPressed: () {
+                final url = 'https://github.com/erickAC/';
+                Navigator.of(context).pushNamed(url);
+              },
+              child: const Text('Github'),
+            ),
+          ),
+        ],
       ),
       body: Container(
         height: double.infinity,
@@ -69,7 +80,6 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onTap: () {
                   Navigator.of(context).pushNamed('/cliente', arguments: Argumentos(_clienteModel![index].id));
-                  
                 },
               );
             },)
