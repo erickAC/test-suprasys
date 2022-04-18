@@ -20,8 +20,8 @@ class ProdutoModel {
     int id;
     String nome;
     int estoque;
-    int valor;
-    int desconto;
+    double valor;
+    double desconto;
 
     factory ProdutoModel.fromJson(Map<String, dynamic> json) => ProdutoModel(
         id: json["id"],

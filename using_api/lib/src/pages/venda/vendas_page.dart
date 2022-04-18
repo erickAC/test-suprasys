@@ -2,29 +2,30 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:using_api/src/models/cliente_model.dart';
-import 'package:using_api/src/pages/cliente/cliente_page.dart';
-import 'package:using_api/src/services/ClienteService.dart';
+import 'package:using_api/src/models/produto_model.dart';
+import 'package:using_api/src/models/venda_model.dart';
+import 'package:using_api/src/pages/produto/produto_page.dart';
+import 'package:using_api/src/services/VendaService.dart';
 import 'package:using_api/src/templates/drawer_template.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({ Key? key }) : super(key: key);
+class VendasPage extends StatefulWidget {
+  const VendasPage({ Key? key }) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<VendasPage> createState() => _VendasPageState();
   
 }
 
-class _HomePageState extends State<HomePage> {
+class _VendasPageState extends State<VendasPage> {
 
-  late List<ClienteModel>? _clienteModel = [];
+  late List<VendaModel>? _vendaPage = [];
   @override
   void initState() {
     super.initState();
     _getData();
   }
   void _getData() async {
-    _clienteModel = (await ClienteService().findAll())!; 
+    _vendaPage = (await VendaService().findAll())!; 
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   } 
 
@@ -41,34 +42,29 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(8.0),
           child: ListView.builder(
             addAutomaticKeepAlives: true,
-            itemCount: _clienteModel!.length,
+            itemCount: _vendaPage!.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(_clienteModel![index].nome),
+                title: Text("Venda: " + _vendaPage![index].id.toString()),
                 leading: Icon(Icons.people),
                 hoverColor: Colors.lightBlue,
                 trailing: Wrap(
-                  alignment: WrapAlignment.spaceAround,
+                  alignment: WrapAlignment.spaceAround
+                  ,
+                  
                   children: [
-                    TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Colors.white),
-                      onPressed: () {
-                    ClienteService().status(_clienteModel![index].id);
-                  },
-                  child: Text('Status'),
-                ),
                 SizedBox(width: 10,),
                     TextButton(
                       style: TextButton.styleFrom(backgroundColor: Colors.white),
                       onPressed: () {
-                    ClienteService().delete(_clienteModel![index].id);
+                    VendaService().delete(_vendaPage![index].id);
                   },
                   child: Text('Excluir'),
                 ),
                   ],
                 ),
                 onTap: () {
-                  Navigator.of(context).pushNamed('/cliente', arguments: Argumentos(_clienteModel![index].id));
+                  Navigator.of(context).pushNamed('/venda', arguments: Argumentos(_vendaPage![index].id));
                   
                 },
               );

@@ -6,7 +6,7 @@ import 'package:using_api/src/services/ProdutoService.dart';
 class ProdutoPage extends StatelessWidget {
   const ProdutoPage({ Key? key }) : super(key: key);
 
-  static const String routeName = '/produto';
+  static const String routeName = '/venda';
   
   @override
   Widget build(BuildContext context) { 
@@ -19,6 +19,7 @@ class ProdutoPage extends StatelessWidget {
   }
 
   int idProduto = id.id;
+  TextEditingController idController = TextEditingController();
   TextEditingController nomeController = TextEditingController();
   TextEditingController valorController = TextEditingController();
   TextEditingController descontoController = TextEditingController();
@@ -75,11 +76,7 @@ class ProdutoPage extends StatelessWidget {
                           final double desconto = double.parse(descontoController.text);
                           final int estoque = int.parse(estoqueController.text);
 
-                          print(idProduto);
-                          print(estoque);
-                          print(valor);
-                          print(desconto);
-                          ProdutoService().update(idProduto, nome, valor, desconto, estoque);
+                          ProdutoService().update(idProduto, nome, valor, desconto, estoque); 
 
                           Navigator.of(context).pushNamed('/listar_produto');
 

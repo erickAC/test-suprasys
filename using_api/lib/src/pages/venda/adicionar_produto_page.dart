@@ -69,7 +69,7 @@ class AdicionarProduto extends StatelessWidget {
               final String nome = nomeController.text;
               final double valor = double.parse(valorController.text);
               final double desconto = double.parse(descontoController.text);
-              final int estoque = int.parse(estoqueController.value.text);
+              final int estoque = int.parse(estoqueController.text);
 
               ProdutoService().create(nome, valor, desconto, estoque);
 

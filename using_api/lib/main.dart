@@ -6,6 +6,7 @@ import 'package:using_api/src/pages/cliente/adicionar_cliente_page.dart';
 import 'package:using_api/src/pages/produto/adicionar_produto_page.dart';
 import 'package:using_api/src/pages/produto/produto_page.dart';
 import 'package:using_api/src/pages/produto/produtos_page.dart';
+import 'package:using_api/src/pages/venda/vendas_page.dart';
 import 'package:using_api/src/services/ClienteService.dart';
 
 void main() {
@@ -32,6 +33,8 @@ class MyApp extends StatelessWidget {
           '/adicionar_produto':((context) => AdicionarProduto()),
           '/listar_produto': (((context) => ProdutosPage())),
           ProdutoPage.routeName: (context) => ProdutoPage(),
+          '/listar_venda': (((context) => VendasPage
+          ())),
         },
     );
   }

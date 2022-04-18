@@ -68,7 +68,7 @@ class ClienteService {
     Future<ClienteModel> update(int id,String nome, String login, String senha) async{
 
       var body = {
-        "idCliente": id,
+        "id": id,
         "nome": nome,
         "login": login,
         "senha": senha

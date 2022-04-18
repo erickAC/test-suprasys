@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:using_api/src/models/cliente_model.dart';
 import 'package:using_api/src/models/produto_model.dart';
-import 'package:using_api/src/pages/cliente/cliente_page.dart';
-import 'package:using_api/src/services/ClienteService.dart';
+import 'package:using_api/src/pages/produto/produto_page.dart';
 import 'package:using_api/src/services/ProdutoService.dart';
+import 'package:using_api/src/templates/drawer_template.dart';
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({ Key? key }) : super(key: key);
@@ -32,24 +31,7 @@ class _ProdutosPageState extends State<ProdutosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-       child: ListView(
-         children: [
-           TextButton(
-           onPressed: () {
-             Navigator.of(context).pushNamed('/adicionar_cliente');
-           },
-           child: Text('Adicionar Cliente'), 
-             ),
-             TextButton(
-           onPressed: () {
-             Navigator.of(context).pushNamed('/adicionar_produto',);
-           },
-           child: Text('Adicionar Produto'), 
-             ),
-         ]
-       ),
-      ),
+      drawer: DrawerTemplate(),
       appBar: AppBar(
         title: Text('Recrutamento SupraSys'),
       ),
@@ -70,13 +52,6 @@ class _ProdutosPageState extends State<ProdutosPage> {
                   ,
                   
                   children: [
-                    TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Colors.white),
-                      onPressed: () {
-                    ClienteService().status(_produtoPage![index].id);
-                  },
-                  child: Text('Status'),
-                ),
                 SizedBox(width: 10,),
                     TextButton(
                       style: TextButton.styleFrom(backgroundColor: Colors.white),
@@ -89,7 +64,6 @@ class _ProdutosPageState extends State<ProdutosPage> {
                 ),
                 onTap: () {
                   Navigator.of(context).pushNamed('/produto', arguments: Argumentos(_produtoPage![index].id));
-                  
                 },
               );
             },)
