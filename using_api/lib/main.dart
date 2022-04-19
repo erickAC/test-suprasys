@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:using_api/src/pages/cliente/cliente_page.dart';
+import 'package:using_api/src/pages/cliente/clientes_busca_nome.dart';
 import 'package:using_api/src/pages/home_page.dart';
 import 'package:using_api/src/models/cliente_model.dart';
 import 'package:using_api/src/pages/cliente/adicionar_cliente_page.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
           '/': ((context) => HomePage()),
           '/adicionar_cliente':((context) => ClienteAdd()),
           ClientePage.routeName: (context) => ClientePage(),
+          ClienteBuscaNome.routeName: (context) => ClienteBuscaNome(),
           '/adicionar_produto':((context) => AdicionarProduto()),
           '/listar_produto': (((context) => ProdutosPage())),
           ProdutoPage.routeName: (context) => ProdutoPage(),

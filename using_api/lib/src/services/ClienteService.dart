@@ -105,4 +105,19 @@ class ClienteService {
       }
     }
 
+    Future<ClienteModel> findByNome(String nome) async{
+      var response = await http.get(Uri.parse("http://localhost:8080/cliente/listar/nome/${nome}"),
+      headers: {
+        "authorization": basicAuth
+      });
+
+      if(response.statusCode == 200) {
+        ClienteModel model = ClienteModel.fromJson(jsonDecode(response.body));
+        return model;
+      } else {
+        throw Exception("Erro ao buscar cliente pelo nome: " +  nome);
+      }
+
+    }
+
 }

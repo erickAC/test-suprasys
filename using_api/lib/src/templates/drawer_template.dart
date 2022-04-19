@@ -22,17 +22,17 @@ class DrawerTemplate extends StatelessWidget {
              },
              child: Text('Adicionar Cliente'), 
                ),
+            TextButton(
+             onPressed: () {
+               Navigator.of(context).pushNamed('/listar_produto',);
+             },
+             child: Text('Listar Produto'), 
+               ),
                TextButton(
              onPressed: () {
                Navigator.of(context).pushNamed('/adicionar_produto',);
              },
              child: Text('Adicionar Produto'), 
-               ),
-               TextButton(
-             onPressed: () {
-               Navigator.of(context).pushNamed('/listar_produto',);
-             },
-             child: Text('Listar Produto'), 
                ),
            ]
          ),
