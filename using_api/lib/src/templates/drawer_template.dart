@@ -8,7 +8,8 @@ class DrawerTemplate extends StatelessWidget {
     return Drawer(
        child: Container(
          height: MediaQuery.of(context).size.height,
-         child: ListView(
+         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
            children: [
              TextButton(
              onPressed: () {

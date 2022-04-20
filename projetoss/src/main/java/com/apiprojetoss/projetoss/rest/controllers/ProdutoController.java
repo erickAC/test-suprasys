@@ -24,7 +24,7 @@ public class ProdutoController {
         return produtoService.findAll();
     }
 
-    @GetMapping("listar/{id}")
+    @GetMapping("/listar/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Produto findById(@PathVariable Integer id)  {
         return produtoService.findById(id).get();
@@ -55,6 +55,12 @@ public class ProdutoController {
         BeanUtils.copyProperties(produto, produtoExistente);
         produto.setId(id);
         return produtoService.create(produto);
+    }
+
+    @GetMapping("/listar/nome/{nome}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Produto> findAllByNome(@PathVariable(name = "nome") String nome) {
+        return produtoService.findAllByNome(nome);
     }
 
 }

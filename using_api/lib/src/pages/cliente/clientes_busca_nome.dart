@@ -10,7 +10,6 @@ class ClienteBuscaNome extends StatelessWidget {
 
   static const String routeName = '/clienteNome';
 
-
   @override
   Widget build(BuildContext context) {
 
@@ -19,7 +18,7 @@ class ClienteBuscaNome extends StatelessWidget {
     print(nome.nome);
 
     Future<ClienteModel?> _getDados() async{
-      Future<ClienteModel?> cliente = ClienteService().findByNome(nome.nome.toString());
+      Future<ClienteModel?> cliente = ClienteService().findByNome(nome.nome);
       return cliente;
     }
 
@@ -52,10 +51,14 @@ class ClienteBuscaNome extends StatelessWidget {
                    ],
                    );
                } else {
-                 return const Text('Carregando dados');
-               }
-             },
-           )
+                 return TextButton(
+                   onPressed: () {
+                    Navigator.of(context).pushNamed('/');
+                   },
+                   child: Text("Voltar a página inicial"),
+                 );
+             };
+             }),
              ),
       ),
     );

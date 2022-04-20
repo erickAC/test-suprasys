@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:using_api/src/models/cliente_model.dart';
 import 'package:using_api/src/services/ClienteService.dart';
 
 class ClienteAdd extends StatelessWidget {
@@ -51,9 +52,46 @@ class ClienteAdd extends StatelessWidget {
               final String login = loginController.text;
               final String senha = senhaController.text;
 
-              ClienteService().create(nome, login, senha);
+              final erro = SnackBar(
+                  content: Text("Erro ao salvar cliente"),  
+                  backgroundColor: Colors.red,
+                  duration: Duration(seconds: 2),
+                  action: SnackBarAction(
+                    textColor: Colors.white,
+                    label: 'OK',
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/');
+                    },
+                    ),
+                );
 
-              Navigator.of(context).pushNamed('/');
+                final sucesso = SnackBar(
+                content: Text("Cadastrado com sucesso"),
+                backgroundColor: Colors.green,
+                duration: Duration(seconds: 2),
+                action: SnackBarAction(
+                  textColor: Colors.white,
+                  label: 'OK',
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/');
+                  },
+                ),
+                );
+
+              salvarDados() async{
+                try{
+                  bool cliente = await ClienteService().create(nome, login, senha);
+                  print(cliente);
+                  if(cliente == true) {
+                    ScaffoldMessenger.of(context).showSnackBar(sucesso);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(erro);
+                  }
+                } catch(e) {
+                  print('Erro');
+                } 
+              }
+              print(salvarDados());
 
             },
              child: const Text('Enviar'))

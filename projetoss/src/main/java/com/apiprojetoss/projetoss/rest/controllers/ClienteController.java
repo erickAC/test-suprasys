@@ -31,6 +31,7 @@ public class ClienteController {
     }
 
     @GetMapping("/listar/nome/{nome}")
+    @ResponseStatus(HttpStatus.OK )
     public Cliente findByNome(@PathVariable String nome) {
         return clienteService.findByNome(nome).get();
     }

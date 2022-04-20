@@ -5,6 +5,7 @@ import 'package:using_api/src/pages/home_page.dart';
 import 'package:using_api/src/models/cliente_model.dart';
 import 'package:using_api/src/pages/cliente/adicionar_cliente_page.dart';
 import 'package:using_api/src/pages/produto/adicionar_produto_page.dart';
+import 'package:using_api/src/pages/produto/produto_busca_nome.dart';
 import 'package:using_api/src/pages/produto/produto_page.dart';
 import 'package:using_api/src/pages/produto/produtos_page.dart';
 import 'package:using_api/src/pages/venda/vendas_page.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           '/adicionar_produto':((context) => AdicionarProduto()),
           '/listar_produto': (((context) => ProdutosPage())),
           ProdutoPage.routeName: (context) => ProdutoPage(),
+          ProdutoBuscaNome.routeName: (context) => ProdutoBuscaNome(),
           '/listar_venda': (((context) => VendasPage
           ())),
         },

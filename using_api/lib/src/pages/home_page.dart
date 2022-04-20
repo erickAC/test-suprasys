@@ -1,3 +1,6 @@
+import 'dart:html';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:using_api/src/models/cliente_model.dart';
 import 'package:using_api/src/pages/cliente/cliente_page.dart';
@@ -10,7 +13,6 @@ class HomePage extends StatefulWidget {
 
   @override
   State<HomePage> createState() => _HomePageState();
-  
 }
 
 class _HomePageState extends State<HomePage> {
@@ -36,19 +38,6 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Recrutamento'),
         centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-              style: TextButton.styleFrom(backgroundColor: Colors.white, primary: Colors.blue),
-              onPressed: () {
-                final url = 'https://github.com/erickAC/';
-                Navigator.of(context).pushNamed(url);
-              },
-              child: const Text('Github'),
-            ),
-          ),
-        ],
       ),
       body: Container(
         height: double.infinity,

@@ -30,4 +30,8 @@ public class ProdutoService {
     public void delete(Integer id) {
         produtoRepository.deleteById(id);
     }
+
+    public List<Produto> findAllByNome(String nome) {
+        return produtoRepository.findAllByNomeLike(nome);
+    }
 }

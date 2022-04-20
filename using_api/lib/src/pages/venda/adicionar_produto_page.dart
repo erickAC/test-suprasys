@@ -20,13 +20,11 @@ class AdicionarProduto extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Nome do Produto'
-                ),
-                controller: nomeController,
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Nome do Produto'
               ),
+              controller: nomeController,
             )
           ),
           Padding(
@@ -63,9 +61,46 @@ class AdicionarProduto extends StatelessWidget {
               final double desconto = double.parse(descontoController.text);
               final int estoque = int.parse(estoqueController.text);
 
-              ProdutoService().create(nome, valor, desconto, estoque);
+              final erro = SnackBar(
+                  content: Text("Erro ao salvar produto"),  
+                  backgroundColor: Colors.red,
+                  duration: Duration(seconds: 2),
+                  action: SnackBarAction(
+                    textColor: Colors.white,
+                    label: 'OK',
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/listar_produto');
+                    },
+                    ),
+                );
 
-              Navigator.of(context).pushNamed('/listar_produto');
+                final sucesso = SnackBar(
+                content: Text("Cadastrado com sucesso"),
+                backgroundColor: Colors.green,
+                duration: Duration(seconds: 2),
+                action: SnackBarAction(
+                  textColor: Colors.white,
+                  label: 'OK',
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/listar_produto');
+                  },
+                ),
+                );
+
+              salvarDados() async{
+                try{
+                  bool produto = await ProdutoService().create(nome, valor, desconto, estoque);
+                  print(produto);
+                  if(produto == true) {
+                    ScaffoldMessenger.of(context).showSnackBar(sucesso);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(erro);
+                  }
+                } catch(e) {
+                  print('Erro');
+                } 
+              }
+              print(salvarDados());
 
             },
              child: Text('Enviar'))
